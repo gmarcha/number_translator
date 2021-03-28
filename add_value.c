@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_value.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/28 12:50:17 by gamarcha          #+#    #+#             */
+/*   Updated: 2021/03/28 12:59:44 by gamarcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dict.h"
 
 char				*get_value(char *nbr)
@@ -32,7 +44,7 @@ t_list				*add_value(t_dict *dict, t_list **begin_list, int val)
 		{
 			if (!ft_list_push_back(begin_list, dict[j].key))
 				return (ft_free(value));
-			break;
+			break ;
 		}
 		if (!dict[j + 1].value)
 		{
@@ -74,7 +86,7 @@ t_list				*add_coeff(t_dict *dict, t_list **begin_list, int zero)
 		{
 			if (!ft_list_push_back(begin_list, dict[j].key))
 				return (ft_free(value));
-			break;
+			break ;
 		}
 		if (!dict[j + 1].value)
 		{

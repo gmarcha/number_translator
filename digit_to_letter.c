@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   digit_to_letter.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/28 12:50:45 by gamarcha          #+#    #+#             */
+/*   Updated: 2021/03/28 16:30:22 by gamarcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dict.h"
 
 t_dict				*treat_hundred(t_dict *dict, t_list **list, int val)
@@ -12,7 +24,7 @@ t_dict				*treat_hundred(t_dict *dict, t_list **list, int val)
 			return (0);
 	}
 	if (val / 100 && val % 100)
-		if (!ft_list_push_back(list, " "))
+		if (!ft_list_push_back(list, " and "))
 			return (0);
 	return (dict);
 }
@@ -33,7 +45,7 @@ t_dict				*treat_remainder(t_dict *dict, t_list **list, int val)
 				if (!add_value(dict, list, val / 10 * 10))
 					return (0);
 			if (val / 10 && val % 10)
-				if (!ft_list_push_back(list, " "))
+				if (!ft_list_push_back(list, "-"))
 					return (0);
 			if (val % 10)
 				if (!add_value(dict, list, val % 10))
@@ -51,7 +63,7 @@ t_dict				*treat_coeff(t_dict *dict, t_list **list, int val, int i)
 			return (0);
 		if (!add_coeff(dict, list, i * 3))
 			return (0);
-		if (!ft_list_push_back(list, " "))
+		if (!ft_list_push_back(list, ", "))
 			return (0);
 	}
 	return (dict);
@@ -83,8 +95,7 @@ t_list				*digit_to_letter(t_dict *dict, char *nbr, int coeff)
 		begin_list2 = 0;
 		if (!(str = get_value(nbr)))
 			return (0);
-		val = ft_atoi(str);
-		if (!treat_value(dict, &begin_list2, val, i))
+		if (!treat_value(dict, &begin_list2, (val = ft_atoi(str)), i))
 		{
 			ft_free_list(begin_list2);
 			ft_free_list(begin_list1);

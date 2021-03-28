@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/28 12:51:05 by gamarcha          #+#    #+#             */
+/*   Updated: 2021/03/28 13:26:36 by gamarcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dict.h"
 
 int					get_coeff(char *nbr)
@@ -32,6 +44,7 @@ int					handle_zero(t_dict *dict)
 		if (ft_strcmp(dict[i].value, "0") == 0)
 		{
 			ft_putstr(dict[i].key);
+			ft_putstr("\n");
 			ft_free_dict(dict);
 			return (0);
 		}

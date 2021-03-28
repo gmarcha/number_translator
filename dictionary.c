@@ -1,43 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dictionary.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/28 12:50:37 by gamarcha          #+#    #+#             */
+/*   Updated: 2021/03/28 16:34:30 by gamarcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dict.h"
 
-int					check_line(char **buf)
+t_dict				*fill_dict(t_dict *dict, char **strs, int nb_entries)
 {
-	while (**buf && is_sep(**buf, "\n"))
-		(*buf)++;
-	while (**buf && is_sep(**buf, " \t"))
-		(*buf)++;
-	if (**buf && !is_sep(**buf, "0123456789"))
-		return (0);
-	while (**buf && is_sep(**buf, "0123456789"))
-		(*buf)++;
-	while (**buf && is_sep(**buf, " \t"))
-		(*buf)++;
-	if (**buf && !is_sep(**buf, ":"))
-		return (0);
-	(*buf)++;
-	while (**buf && is_sep(**buf, " \t"))
-		(*buf)++;
-	if (**buf && is_sep(**buf, "\n"))
-		return (0);
-	while (**buf && !is_sep(**buf, " \t\n"))
-		(*buf)++;
-	while (**buf && is_sep(**buf, " \t\n"))
-		(*buf)++;
-	return (1);
-}
+	char			*array;
+	int				i;
+	int				j;
 
-int					get_nb_entries(char *buf)
-{
-	int				count;
-	
-	count = 0;
-	while (*buf)
+	i = -1;
+	while (++i < nb_entries)
 	{
-		if (!check_line(&buf))
-			return (0);
-		count++;
+		array = trim(strs[i * 2]);
+		j = 0;
+		while (j < i)
+			if (ft_strcmp(dict[j++].value, array) == 0)
+				return (0);
+		dict[i].value = ft_strdup(array);
+		dict[i].key = ft_strdup(strs[i * 2 + 1]);
+		free(array);
 	}
-	return (count);
+	dict[i].value = 0;
+	return (dict);
 }
 
 t_dict				*read_dict(char *buf)
@@ -45,7 +39,6 @@ t_dict				*read_dict(char *buf)
 	t_dict			*dict;
 	char			**strs;
 	int				nb_entries;
-	int				i;
 
 	if (!(nb_entries = get_nb_entries(buf)))
 		return (0);
@@ -53,13 +46,8 @@ t_dict				*read_dict(char *buf)
 		return (0);
 	if (!(dict = (t_dict *)malloc(sizeof(t_dict) * (nb_entries + 1))))
 		return (ft_free_strs(strs));
-	i = -1;
-	while (++i < nb_entries)
-	{
-		dict[i].value = ft_strdup(strs[i * 2]);
-		dict[i].key = ft_strdup(strs[i * 2 + 1]);
-	}
-	dict[i].value = 0;
+	if (!fill_dict(dict, strs, nb_entries))
+		return (ft_free_strs(strs));
 	ft_free_strs(strs);
 	return (dict);
 }
@@ -72,7 +60,7 @@ t_dict				*parse_dict(char *file)
 	int				fd;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
-		return (ft_puterr("Dict Error Fuck\n"));
+		return (ft_puterr("Dict Error\n"));
 	if ((buf_size = read(fd, buf, 32768)) < 1)
 		return (ft_puterr("Dict Error\n"));
 	buf[buf_size] = 0;

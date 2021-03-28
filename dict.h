@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dict.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/28 12:51:53 by gamarcha          #+#    #+#             */
+/*   Updated: 2021/03/28 16:35:16 by gamarcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DICT_H
 # define DICT_H
 
@@ -11,11 +23,11 @@ typedef struct		s_dict
 	char			*key;
 }					t_dict;
 
-typedef struct      s_list
+typedef struct		s_list
 {
-    struct s_list   *next;
-    void            *data;
-}                   t_list;
+	struct s_list	*next;
+	void			*data;
+}					t_list;
 
 char				*get_value(char *nbr);
 t_list				*add_value(t_dict *dict, t_list **begin_list, int val);
@@ -24,6 +36,9 @@ t_list				*add_coeff(t_dict *dict, t_list **begin_list, int zero);
 
 int					check_line(char **buf);
 int					get_nb_entries(char *buf);
+char				*trim(char *str);
+
+t_dict				*fill_dict(t_dict *dict, char **strs, int nb_entries);
 t_dict				*read_dict(char *buf);
 t_dict				*parse_dict(char *file);
 

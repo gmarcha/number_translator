@@ -1,6 +1,6 @@
 NAME	= rush-02
 CC		= gcc
-FLAGS	= -Wall -Wextra -Werror
+FLAGS	= -Wall -Wextra -Werror -fsanitize=address
 SRC		= $(wildcard *.c)
 OBJ		= $(SRC:.c=.o)
 

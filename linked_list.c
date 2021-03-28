@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linked_list.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/28 12:50:58 by gamarcha          #+#    #+#             */
+/*   Updated: 2021/03/28 14:08:22 by gamarcha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dict.h"
 
 void				ft_free_list(t_list *begin_list)
@@ -22,8 +34,11 @@ void				ft_print_list(t_list *begin_list)
 	while (begin_list)
 	{
 		if (!begin_list->next)
-			if (ft_strcmp(begin_list->data, " ") == 0)
+			if (ft_strcmp(begin_list->data, ", ") == 0)
+			{
+				write(1, "\n", 1);
 				return ;
+			}
 		ft_putstr((char *)begin_list->data);
 		begin_list = begin_list->next;
 	}
@@ -34,7 +49,7 @@ t_list				*ft_create_element(void *data)
 {
 	t_list			*node;
 
-	if (!(node = (t_list *) malloc(sizeof(t_list))))
+	if (!(node = (t_list *)malloc(sizeof(t_list))))
 		return (0);
 	node->next = 0;
 	node->data = ft_strdup((char *)data);
@@ -50,7 +65,7 @@ t_list				*ft_list_push_back(t_list **begin_list, void *data)
 		if (!(*begin_list = ft_create_element(data)))
 			return (0);
 	}
-	else 
+	else
 	{
 		node = *begin_list;
 		while (node->next)
