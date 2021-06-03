@@ -6,7 +6,7 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:51:05 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/03/28 13:26:36 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/06/03 14:44:13 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int					main(int argc, char *argv[])
 	begin_list = 0;
 	if (!parse_input(argc, argv))
 		return (0);
-	if (!(dict = parse_dict((argc == 3) ? argv[1] : "numbers.dict")))
+	if (!(dict = parse_dict((argc == 3) ? argv[1] : "dict/numbers.dict")))
 		return (0);
 	nbr = (argc == 3) ? argv[2] : argv[1];
 	if (is_zero(nbr))
