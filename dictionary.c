@@ -6,12 +6,13 @@
 /*   By: gamarcha <gamarcha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:50:37 by gamarcha          #+#    #+#             */
-/*   Updated: 2021/03/28 16:34:30 by gamarcha         ###   ########.fr       */
+/*   Updated: 2021/06/03 14:52:17 by gamarcha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dict.h"
 
+#include <stdio.h>
 t_dict				*fill_dict(t_dict *dict, char **strs, int nb_entries)
 {
 	char			*array;
@@ -26,6 +27,7 @@ t_dict				*fill_dict(t_dict *dict, char **strs, int nb_entries)
 		while (j < i)
 			if (ft_strcmp(dict[j++].value, array) == 0)
 				return (0);
+		printf("Value: %d\t%s\n", i, strs[i * 2]);
 		dict[i].value = ft_strdup(array);
 		dict[i].key = ft_strdup(strs[i * 2 + 1]);
 		free(array);
